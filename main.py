@@ -1,8 +1,6 @@
 from collections import UserDict
 from datetime import datetime, date, timedelta
 
-
-
 class Field:
     def __init__(self, value):
         self.value = value
@@ -94,8 +92,8 @@ class AddressBook(UserDict):
         today = date.today()
         dic_list = []
         for record in self.data.values():
-            dic_list.append(
-                {"name": record.name.value, "birthday": datetime.strptime(record.birthday.value, "%d.%m.%Y").date()})
+            if record.birthday:
+                dic_list.append({"name": record.name.value, "birthday": datetime.strptime(record.birthday.value, "%d.%m.%Y").date()})
         for contact in dic_list:
             contact["birthday"] = contact["birthday"].replace(year=today.year)
             if contact["birthday"] < today:
